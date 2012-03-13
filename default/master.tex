@@ -1,21 +1,25 @@
-\documentclass[11pt,a4paper,twoside,onecolumn]{report}
+\documentclass[10pt,a4paper,twoside,onecolumn]{article}
 
 \input{preamble}
+
+\settitle{Report title}{Report subtitle}
+\addauthor{Author \#1}
+\addauthor{Author \#2}
+\addauthor{Author \#3}
+
+\input{headers-footers}
+
 
 \begin{document}
 
 \input{title}
 
-%\phantomsection
-%\addcontentsline{toc}{chapter}{\hspace{\cftchapnumwidth}Contents}
-%\pdfbookmark[0]{Contents}{toc:contents}
-\tableofcontents
+\cleardoublepage
+\setcounter{page}{1}
 
-
-\chapter{Title 1}
-\section{Title 2}
-\subsection{Title 3}
-\subsubsection{Title 4}
-Hello
+\section{Section title}
+\subsection{Subsection title}
+\subsubsection{Subsubsection title}
+Body text
 
 \end{document}
