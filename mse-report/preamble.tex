@@ -3,9 +3,7 @@
 
 % Advanced math support
 \usepackage{amsmath}
-
-% Huge list of math symbols
-\usepackage{MnSymbol}
+\usepackage{amsfonts}
 
 % Set the margin from the page side
 \usepackage[margin=3cm]{geometry}
@@ -20,10 +18,13 @@
     urlcolor=black,
 }
 
+% Advanced automatic references
+\usepackage{varioref}
+
 % Leave out page numbers on empty pages
 \let\origdoublepage\cleardoublepage
 \renewcommand{\cleardoublepage}{%
-  \clearpage
+  \clearpage%
   {\pagestyle{empty}\origdoublepage}%
 }
 
@@ -42,6 +43,11 @@
 
 % Allow URL typesetting
 \usepackage{url}
+
+% Allow email typesetting
+\newcommand{\email}[1]{%
+	\href{mailto:#1}{\texttt{#1}}%
+}
 
 % Allow advanced list typesetting
 \usepackage{enumitem}
@@ -65,10 +71,16 @@
 \usepackage{graphicx}
 
 % Allows to change text color
-\usepackage[usenames,dvipsnames,table<D-+>]{xcolor}
+\usepackage[usenames,dvipsnames,table]{xcolor}
 
 % Assign the LastPage label to the last page
 \usepackage{lastpage}
+
+% Help better structure documents
+\newcommand{\content}{%
+	\cleardoublepage%
+	\setcounter{page}{1}
+}
 
 % Enable the creation of appendices
 \usepackage{appendix}
@@ -144,15 +156,9 @@
 	showstringspaces=false,
 }
 
-% Diff files highlighting
-\lstdefinelanguage{diff}{
-  morecomment=[f][\color{blue}]{@@},     % group identifier
-  morecomment=[f][\color{Red}]-,         % deleted lines
-  morecomment=[f][\color{OliveGreen}]+,  % added lines
-  morecomment=[f][\color{Gray}]{---},    % Diff header lines (must appear after +,-)
-  morecomment=[f][\color{Gray}]{+++},
-}
+% TODO: Create macros for lstlisting with or without line numbers
 
+\input{languages/diff.tex}  % Diff files highlighting
 
 % Enable the use of footnotes in section headings
 % http://www.tex.ac.uk/cgi-bin/texfaq2html?label=ftnsect
@@ -186,10 +192,16 @@
 	\addcontentsline{toc}{section}{\hspace{\cftsecnumwidth}#1}
 }
 
+% Use subfloats for figures and tables (must be loaded after the caption and tocloft packages)
+\usepackage[lofdepth,lotdepth]{subfig}
+
 % Color definitions
 \definecolor{highlightyellow}{RGB}{255,255,140}
 \definecolor{mselogogray}{RGB}{96,101,109} % Color definition for the MSE logo
 
 % Enable highlighting using \HighlightFrom and \HighlightTo
 \usepackage{classes/highlighter}
-\tikzset{highlighter/.style = {highlightyellow, line width = \baselineskip*.75}}
+\tikzset{highlighter/.style={highlightyellow, line width=0.75\baselineskip}}
+
+% Advanced inclusion support for external documents
+\usepackage{pdfpages}
