@@ -1,0 +1,58 @@
+\lstdefinelanguage{prompt}{
+	morecomment=[l][\color{Black}]{\#},
+	morecomment=[l][\color{Black}]{\$},
+	morecomment=[f]{\#},
+}
+
+\lstnewenvironment{rootprompt}[1][caption=,label=]{%
+	\lstset{
+		language=prompt,
+		numbers=none,
+		basicstyle=\color{BrickRed}\footnotesize\ttfamily,
+		xleftmargin=6pt,
+		framexleftmargin=6pt,
+		framextopmargin=.5pt,
+		framexbottommargin=1pt,
+		rulecolor=\color{verylightgray},
+		backgroundcolor=\color{verylightgray},
+		#1
+	}
+}{\vspace*{-2mm}}
+
+\lstnewenvironment{userprompt}[1][caption=,label=]{%
+	\lstset{
+		language=prompt,
+		numbers=none,
+		basicstyle=\color{RoyalBlue}\footnotesize\ttfamily,
+		xleftmargin=0pt,
+		xrightmargin=0pt,
+		framexleftmargin=6pt,
+		framexrightmargin=6pt,
+		framextopmargin=0pt,
+		framexbottommargin=0pt,
+		rulecolor=\color{verylightgray},
+		backgroundcolor=\color{verylightgray},
+		#1
+	}
+}{\vspace*{-2mm}}
+
+\lstnewenvironment{cmdresult}[1][caption=,label=,language=]{%
+	\lstset{
+		numbers=none,
+		xleftmargin=0pt,
+		xrightmargin=0pt,
+		framexleftmargin=6pt,
+		framexrightmargin=6pt,
+		framextopmargin=0pt,
+		framexbottommargin=0pt,
+		language=,
+		frame=b,
+		#1
+	}
+	\vspace*{-1.2mm}
+}{\vspace*{-2mm}}
+
+
+\lstnewenvironment{edit}[1][caption=,label=,language=bash]{%
+	\lstset{numbers=left,xleftmargin=17pt,framexleftmargin=17pt,numbersep=10pt,#1}
+}{\vspace*{-2mm}}
