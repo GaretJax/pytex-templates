@@ -3,7 +3,7 @@
 
 % Advanced math support
 \usepackage{amsmath}
-\usepackage{amsfonts}
+\usepackage{MnSymbol}
 
 % Set the margin from the page side
 \usepackage[margin=3cm]{geometry}
@@ -130,6 +130,20 @@
 \usepackage{listings}
 \usepackage{courier} % Use Adobe Courier instead of Computer Modern Typewriter
                      % for monospaced text
+
+\usepackage{hyphenat}
+
+\newsavebox\leftarrowbox
+\sbox\leftarrowbox{\raisebox{-.65mm}{\hspace*{0.3mm}\footnotesize\textcolor{gray}{$\rhookleftarrow$}}}
+\makeatletter
+\renewcommand*{\BreakableSlash}{%
+  \leavevmode
+  \prw@zbreak
+  \discretionary{\usebox\leftarrowbox}{}{}%
+  \prw@zbreak
+}
+\makeatother
+
 \lstloadlanguages{python,bash,sh,xml}
 \lstset{
 	language=python,
