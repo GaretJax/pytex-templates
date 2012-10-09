@@ -1,0 +1,208 @@
+\documentclass[9pt,a4paper,twoside,onecolumn]{article}
+
+% Use UTF-8 for plain tex files
+\usepackage[utf8x]{inputenc}
+
+% Advanced math support
+\usepackage{amsmath}
+\usepackage{MnSymbol}
+
+% Set the margin from the page side
+\usepackage[hmargin=3cm,vmargin=2.5cm]{geometry}
+
+% Support for internal links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=black,
+    urlcolor=black,
+}
+
+% Advanced automatic references
+\usepackage{varioref}
+
+% Allows linebreaks in underlined text (use \ul to underline)
+\usepackage{soul}
+
+% Allow sections of multiple columns
+\usepackage{multicol}
+
+% Don't indent paragrpahs, instead separate them
+\usepackage{parskip}
+\setlength{\parskip}{3mm plus2mm minus2mm}
+\setlength{\parindent}{0cm}
+
+% Use alternative font (see http://www.tug.dk/FontCatalogue/ for alternatives)
+\usepackage{cmbright}
+\renewcommand*\familydefault{\sfdefault} % Set the default font to be sans-serif
+\usepackage[T1]{fontenc}
+
+% Set line height multiplicity
+\linespread{1.05}
+
+% Allow URL typesetting
+\usepackage{url}
+
+% Allow email typesetting
+\newcommand{\email}[1]{%
+	\href{mailto:#1}{\texttt{<#1>}}%
+}
+
+% Allow advanced list typesetting
+\usepackage{enumitem}
+
+% Customize captions appearances 
+\usepackage[margin=1cm]{caption}
+\DeclareCaptionFormat{listing}{{\em #1#2#3}}
+\captionsetup{
+	format=listing,
+	font={small},
+}
+
+% Enable advanced style specifications for the basic listing environments
+% (enumerate, itemize, description)
+\usepackage{enumitem}
+
+% Customize headers and footers
+\usepackage{fancyhdr}
+
+% Includegraphics support
+\usepackage{graphicx}
+
+% Allows to change text color
+\usepackage[usenames,dvipsnames,table]{xcolor}
+
+% Assign the LastPage label to the last page
+\usepackage{lastpage}
+
+% Help better structure documents
+\newcommand{\content}{%
+	\cleardoublepage%
+	\setcounter{page}{1}
+}
+
+% Enable the creation of appendices
+\usepackage{appendix}
+
+% Support for lists
+\usepackage{etoolbox}
+\usepackage{fp}
+
+% Custom elements support
+\newcommand{\addinvitee}[2]{\listadd{\invitees}{#1}\listadd{\inviteemails}{#1 \email{#2}}}
+\newcommand{\fmtinvitee}[2]{#1 #2}
+\newcommand{\setdatetime}[2]{\def\date{#1}\def\time{#2}}
+\newcommand{\setvenue}[1]{\def\venue{#1}}
+\newcommand{\setproject}[1]{\def\project{#1}}
+\newenvironment{agenda}{%
+	\usection{Agenda}
+	\hrule
+	\vspace{1.4mm}
+	\begin{enumerate}[leftmargin=0pt,itemsep=2pt]
+}{\end{enumerate}}
+\newenvironment{decisions}{%
+	\usection{Discussed points \& Decisions}
+	\hrule
+	\vspace{1.4mm}
+	\begin{enumerate}[leftmargin=0pt,itemsep=2pt]
+	\def\point{\item}
+	\newcommand{\dec}[1]{\ul{##1}}
+}{\end{enumerate}}
+\newenvironment{todos}{%
+	\usection{Open points}
+	\hrule
+	\vspace{1.4mm}
+	\begin{itemize}[leftmargin=0pt,itemsep=2pt]
+	\renewcommand{\labelitemi}{$\medsquare$}
+	\def\todo{\item}
+}{\end{itemize}}
+
+\AfterEndPreamble{\input{title}}
+
+% Set layout lenghts
+\setlength{\headheight}{0mm}
+\setlength{\footskip}{2.5cm}
+\addtolength{\textheight}{-.5cm}
+
+% Set titles whitespace
+\usepackage{titlesec}
+\titlespacing{\section}{0mm}{6mm}{1mm}
+\titlespacing{\subsection}{0mm}{3mm}{-2mm}
+\titlespacing{\subsubsection}{0mm}{2mm}{-1mm}
+
+% Enable code listings and set default options
+\usepackage{listings}
+\usepackage{courier} % Use Adobe Courier instead of Computer Modern Typewriter
+                     % for monospaced text
+
+\usepackage{hyphenat}
+
+\newsavebox\leftarrowbox
+\sbox\leftarrowbox{\raisebox{-.65mm}{\hspace*{0.3mm}\footnotesize\textcolor{gray}{$\rhookleftarrow$}}}
+\makeatletter
+\renewcommand*{\BreakableSlash}{%
+  \leavevmode
+  \prw@zbreak
+  \discretionary{\usebox\leftarrowbox}{}{}%
+  \prw@zbreak
+}
+\makeatother
+
+% Enable the use of footnotes in section headings
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=ftnsect
+\usepackage[stable]{footmisc}
+
+% Limit the TOC dept to sections and subsections
+\setcounter{tocdepth}{2}
+
+\usepackage{multirow} % Enable columns spawning multiple rows
+\usepackage{tabularx}
+\usepackage{booktabs} % Provides {top|middle|bottom}rule
+\usepackage{longtable} % Support for tables spawning multiple pages,
+                       % captions and footnotes.
+                       % Does not work in multicolumn environments
+% Define new tabularx column types:
+%  - R: streteched right aligned
+%  - C: stretched centered
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+\renewcommand{\arraystretch}{1.3} % Set row height multiplicator
+\usepackage{threeparttable} % Manual footnotes counter
+\usepackage{colortbl} % Support for colorint tables
+
+% Provide support for (indented) unnumbered chapter and section titles
+\usepackage{tocloft}
+\newcommand{\uchapter}[1]{
+	\chapter*{#1}
+	\addcontentsline{toc}{chapter}{\hspace{\cftchapnumwidth}#1}
+}
+\newcommand{\usection}[1]{
+	\plainsection*{#1}
+	\addcontentsline{toc}{section}{\hspace{\cftsecnumwidth}#1}
+}
+
+% Use subfloats for figures and tables (must be loaded after the caption and tocloft packages)
+\usepackage[lofdepth,lotdepth]{subfig}
+
+% Color definitions
+\definecolor{highlightyellow}{RGB}{255,255,140}
+\definecolor{mselogogray}{RGB}{96,101,109} % Color definition for the MSE logo
+\definecolor{verylightgray}{RGB}{240,240,240}
+
+% Enable highlighting using \HighlightFrom and \HighlightTo
+\usepackage{classes/highlighter}
+\tikzset{highlighter/.style={highlightyellow, line width=0.75\baselineskip}}
+
+% Advanced inclusion support for external documents
+\usepackage{pdfpages}
+
+% Support for conditional structures
+\usepackage{ifthen}
+
+\let\plainsection\section
+\renewcommand\section[2][\_nolabel]{
+	\plainsection{#2}
+	\ifthenelse{\equal{#1}{\_nolabel}}{}{\label{sec:#1}}
+}

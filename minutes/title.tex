@@ -1,0 +1,25 @@
+{\Large \project}\\[3mm]
+{\Huge \date}\\[3mm]
+
+\begin{table}[h]
+\begin{tabularx}{\textwidth}{ r | X }
+\toprule
+\textbf{Date \& Time} & \date{} @ \time \\
+\midrule
+\textbf{Venue} & \venue \\
+\midrule
+\textbf{Invitees} &
+\vspace{-7pt}
+\newcommand{\fmtlistitem}[1]{
+	\item[$\cdot$] #1
+}
+\begin{itemize}[leftmargin=8.5pt]
+	\forlistloop{\fmtlistitem}{\inviteemails}
+	\vspace*{-12pt}
+\end{itemize} \\
+\bottomrule
+\end{tabularx}
+
+%\caption{}
+\label{tab:meeting-details}
+\end{table}
